@@ -1,0 +1,289 @@
+.main_wrapper.my-page {
+  height: auto;
+  display: flex;
+}
+.main_wrapper.my-page .menus {
+  width: 15%;
+  height: 100%;
+  border: 1px solid black;
+}
+.main_wrapper.my-page .menus .my-page_title {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+  font-weight: 700;
+}
+.main_wrapper.my-page .menus .navs {
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.main_wrapper.my-page .menus .navs .nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  background-color: rgb(207, 207, 207);
+  border-bottom: 1px solid black;
+}
+.main_wrapper.my-page .view {
+  width: 85%;
+  height: auto;
+  padding: 30px 15px;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+.main_wrapper.my-page .view .order_title {
+  text-align: center;
+  font-weight: 700;
+}
+.main_wrapper.my-page .view .member_pwd_title {
+  text-align: center;
+  font-weight: 700;
+}
+.main_wrapper.my-page .join_box {
+  width: 100%;
+  height: 300px;
+  border: 2px solid #dcdcdc;
+  padding: 30px 30px;
+  margin-top: 30px;
+}
+.main_wrapper.my-page .join_box .member_form {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col .member_form_row {
+  height: auto;
+  width: 100%;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col .member_form_row.row1 {
+  margin-bottom: 50px;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col .ref {
+  color: black;
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col .form {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  position: relative;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col .form .col1 {
+  font-size: 13px;
+  float: left;
+  width: 150px;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col .form .col2 {
+  float: left;
+  width: 400px;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col .form input {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col .form .input_text {
+  width: 130px;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col .form.email .col2 {
+  font-size: 13px;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col.check_box {
+  width: 40%;
+  height: 130px;
+}
+.main_wrapper.my-page .join_box .member_form .member_form_col.check_box .col2 {
+  width: 130px;
+}
+.main_wrapper.my-page section {
+  margin-top: 30px;
+}
+.main_wrapper.my-page section button {
+  width: 120px;
+  height: 40px;
+  border: none;
+  background-color: white;
+  border: 2px solid rgb(207, 207, 207);
+  font-size: 15px;
+  font-weight: 700;
+}
+.main_wrapper.my-page section .button_join {
+  background: rgb(207, 207, 207);
+  color: white;
+}
+.main_wrapper.my-page section .button_cancel {
+  color: #8a8a8a;
+}
+
+.table.pay {
+  margin: 30px 0;
+  width: 100%;
+}
+.table.pay .review_write {
+  margin-top: 10px;
+  width: 100px;
+  font-size: 13px;
+  padding: 3px 5px;
+  border: 0.5px solid #7e7e7e;
+  border-radius: 20px;
+  background-color: rgb(169, 216, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.table.pay .review_write:hover {
+  background: #4b5882;
+  color: #fff;
+}
+.table.pay .review_complete {
+  color: #929398;
+  margin-top: 10px;
+  width: 100px;
+  font-size: 13px;
+  padding: 3px 5px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.table.pay .order_info_header {
+  display: flex;
+  border-top: 2px solid black;
+  height: 50px;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 15px;
+}
+.table.pay .order_info_header td {
+  width: auto;
+  height: auto;
+}
+.table.pay .order_info_header td span {
+  font-size: 14px;
+  font-weight: 700;
+}
+.table.pay .order_info_header .order_date {
+  padding-right: 15px;
+  border-right: 2px solid black;
+}
+.table.pay .order_info_header .order_id {
+  padding-left: 15px;
+}
+.table.pay tr {
+  height: 110px;
+  box-sizing: border-box;
+  border: none;
+  border-top: 1px solid black;
+}
+.table.pay td {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+}
+.table.pay .img_wrapper {
+  width: 70px;
+  height: 70px;
+}
+.table.pay .table_header {
+  height: 30px;
+}
+.table.pay .order_status span {
+  font-size: 12px;
+  font-weight: 700;
+}
+.table.pay .order_receipt {
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  height: 70px;
+  margin-bottom: 40px;
+}
+.table.pay .order_receipt .total_title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.table.pay .order_receipt .font_size {
+  font-size: 12px;
+  padding-bottom: 4px;
+}
+.table.pay .order_receipt .font_weight {
+  font-weight: 700;
+}
+
+.table.member {
+  margin: 30px 0;
+  width: 100%;
+}
+.table.member .form {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  position: relative;
+}
+.table.member .form .pwd_col1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 34px;
+  float: left;
+  font-size: 13px;
+  border: 1px solid black;
+  background-color: rgb(207, 207, 207);
+}
+.table.member .form .pwd_col2 {
+  width: 400px;
+  float: left;
+}
+.table.member .form input {
+  width: 300px;
+  height: 30px;
+  border: none;
+  outline: none;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.main_wrapper.my-page.member_info .view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main_wrapper.my-page.member_info .view .join_box .member_form .member_form_col.check_box {
+  margin-left: 30px;
+  border: 2px solid #dcdcdc;
+  padding-top: 10px;
+}
+.main_wrapper.my-page.member_info .view .join_box .member_form .member_form_col.check_box .ref {
+  margin-left: 5px;
+}
+.main_wrapper.my-page.member_info .view .join_box .member_form .member_form_col.check_box .form {
+  height: 38px;
+  margin-left: 15px;
+}
+.main_wrapper.my-page.member_info .view .join_box .member_form .member_form_col.check_box .form .col1 {
+  font-size: 11px;
+}
+.main_wrapper.my-page.member_info .view .join_box .member_form .member_form_col.check_box .form .col2 {
+  font-size: 11px;
+}/*# sourceMappingURL=my-page.css.map */

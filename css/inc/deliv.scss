@@ -1,0 +1,14 @@
+.delivery_today_mark_wrapper {
+	display: flex;
+	font-size: 12px;
+	i {
+		margin-right: 10px;
+		color: rgb(227, 137, 20);
+	}
+	span {
+		font-family: var(--jua-font);
+		font-weight: 700;
+		font-size: 12px;
+		color: rgb(4, 4, 172);
+	}
+}
