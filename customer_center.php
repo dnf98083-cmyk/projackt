@@ -35,10 +35,10 @@ $faqs = [];
 $inquiries = [];
 
 if ($page === 'home') {
-    $notices = db_select("SELECT * FROM notices ORDER BY created_at DESC LIMIT 5");
+    $notices = db_select("SELECT * FROM notice ORDER BY reg_date DESC LIMIT 5");
     $faqs = db_select("SELECT * FROM faqs ORDER BY created_at DESC LIMIT 5");
 } elseif ($page === 'notice') {
-    $notices = db_select("SELECT * FROM notices ORDER BY created_at DESC");
+    $notices = db_select("SELECT * FROM notice ORDER BY reg_date DESC");
 } elseif ($page === 'faq') {
     $faqs = db_select("SELECT * FROM faqs ORDER BY category, created_at DESC");
 } elseif ($page === 'inquiry') {
@@ -443,10 +443,10 @@ if ($page === 'home') {
                             <ul>
                                 <?php foreach ($notices as $notice): ?>
                                 <li>
-                                    <a href="customer_center.php?page=notice">
+                                    <a href="notice_view.php?id=<?= $notice['id'] ?>">
                                         <?= htmlspecialchars($notice['title']) ?>
                                     </a>
-                                    <span><?= date('Y.m.d', strtotime($notice['created_at'])) ?></span>
+                                    <span><?= date('Y.m.d', strtotime($notice['reg_date'])) ?></span>
                                 </li>
                                 <?php endforeach; ?>
                                 <?php if (empty($notices)) echo "<li>등록된 공지사항이 없습니다.</li>"; ?>
@@ -475,9 +475,9 @@ if ($page === 'home') {
                             <?php foreach ($notices as $notice): ?>
                             <tr>
                                 <td><?= $notice['id'] ?></td>
-                                <td class="subject"><?= htmlspecialchars($notice['title']) ?></td>
+                                <td class="subject"><a href="notice_view.php?id=<?= $notice['id'] ?>"><?= htmlspecialchars($notice['title']) ?></a></td>
                                 <td><?= htmlspecialchars($notice['writer']) ?></td>
-                                <td><?= date('Y-m-d', strtotime($notice['created_at'])) ?></td>
+                                <td><?= date('Y-m-d', strtotime($notice['reg_date'])) ?></td>
                             </tr>
                             <?php endforeach; ?>
                             <?php if (empty($notices)): ?>
@@ -535,7 +535,7 @@ if ($page === 'home') {
                             </thead>
                             <tbody>
                                 <?php foreach ($inquiries as $inquiry): ?>
-                                <tr>
+                                <tr onclick="toggleInquiry(this)" style="cursor: pointer;">
                                     <td><?= $inquiry['id'] ?></td>
                                     <td><?= htmlspecialchars($inquiry['type']) ?></td>
                                     <td class="subject"><?= htmlspecialchars($inquiry['title']) ?></td>
@@ -548,12 +548,38 @@ if ($page === 'home') {
                                     </td>
                                     <td><?= date('Y-m-d', strtotime($inquiry['created_at'])) ?></td>
                                 </tr>
+                                <tr class="inquiry-detail" style="display: none; background-color: #f9f9f9;">
+                                    <td colspan="5" style="text-align: left; padding: 20px;">
+                                        <div style="margin-bottom: 20px;">
+                                            <strong style="display: block; margin-bottom: 10px; color: #333;">[문의내용]</strong>
+                                            <div style="white-space: pre-wrap; color: #555;"><?= htmlspecialchars($inquiry['content']) ?></div>
+                                        </div>
+                                        <?php if ($inquiry['answer']): ?>
+                                        <div style="border-top: 1px solid #ddd; padding-top: 20px;">
+                                            <strong style="display: block; margin-bottom: 10px; color: #e60000;">[답변내용]</strong>
+                                            <div style="white-space: pre-wrap; color: #333;"><?= htmlspecialchars($inquiry['answer']) ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
                                 <?php endforeach; ?>
                                 <?php if (empty($inquiries)): ?>
                                 <tr><td colspan="5">등록된 문의 내역이 없습니다.</td></tr>
                                 <?php endif; ?>
                             </tbody>
                         </table>
+                        <script>
+                            function toggleInquiry(row) {
+                                const detailRow = row.nextElementSibling;
+                                if (detailRow && detailRow.classList.contains('inquiry-detail')) {
+                                    const isHidden = detailRow.style.display === 'none';
+                                    // 모든 상세 행 닫기 (선택 사항: 하나만 열리게 하려면 주석 해제)
+                                    // document.querySelectorAll('.inquiry-detail').forEach(el => el.style.display = 'none');
+                                    
+                                    detailRow.style.display = isHidden ? 'table-row' : 'none';
+                                }
+                            }
+                        </script>
                     <?php endif; ?>
 
                 <?php elseif ($page === 'inquiry_write'): ?>

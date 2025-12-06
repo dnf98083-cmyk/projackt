@@ -176,7 +176,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
             $li .= '<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end;">';
             $li .= '<div style="display: flex; flex-direction: column;">';
             if ($rate > 0) {
-                $li .= '<span style="color: #e3405a; font-size: 14px; font-weight: 700; margin-bottom: 2px;">' . $rate . '%</span>';
+                $li .= '<span style="color: #e60000; font-size: 14px; font-weight: 700; margin-bottom: 2px;">' . $rate . '%</span>';
             }
             $li .= '<span style="font-size: 18px; font-weight: 700; color: #333; letter-spacing: -0.5px;">' . $price . '원</span>';
             $li .= '</div>';
@@ -314,7 +314,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                                 <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end;">
                                     <div style="display: flex; flex-direction: column;">
                                         <?php if ($rate > 0): ?>
-                                        <span style="color: #e3405a; font-size: 14px; font-weight: 700; margin-bottom: 2px;"><?= $rate ?>%</span>
+                                        <span style="color: #e60000; font-size: 14px; font-weight: 700; margin-bottom: 2px;"><?= $rate ?>%</span>
                                         <?php endif; ?>
                                         <span style="font-size: 18px; font-weight: 700; color: #333; letter-spacing: -0.5px;"><?= $price ?>원</span>
                                     </div>

@@ -105,7 +105,7 @@ $sale_products = db_select($query);
     }
 
     .sort-select:focus {
-      border-color: #ff6b6b;
+      border-color: #e60000;
     }
 
     .product-grid {
@@ -150,7 +150,7 @@ $sale_products = db_select($query);
       position: absolute;
       top: 10px;
       left: 10px;
-      background: #ff6b6b;
+      background: #e60000;
       color: white;
       padding: 4px 8px;
       border-radius: 4px;
@@ -195,7 +195,7 @@ $sale_products = db_select($query);
     }
     
     .p-rate {
-      color: #ff6b6b;
+      color: #e60000;
       font-weight: bold;
       margin-right: 5px;
     }

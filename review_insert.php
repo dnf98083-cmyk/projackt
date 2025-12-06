@@ -83,6 +83,9 @@ if (!empty($order_id)) {
     db_update_delete($update_pay_query, [$order_id]);
 }
 
+// [추가] 리뷰 작성 시 포인트 지급 (200P)
+db_update_delete("UPDATE members SET point = point + 200 WHERE id = ?", [$writer_id]);
+
 
 // ----------------------------------------------------
 // 5. 결과 처리 및 리다이렉션

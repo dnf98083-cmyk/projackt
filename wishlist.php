@@ -66,7 +66,7 @@ $page_title = '찜한 상품';
                         </div>
                         
                         <div style="padding: 12px;" onclick="location.href='contents_detail.php?content_code=<?= $code ?>'">
-                            <div style="display: inline-block; padding: 4px 10px; background: #fff5f5; color: #ff6b6b; border-radius: 20px; font-size: 0.85rem; margin-bottom: 8px;">
+                            <div style="display: inline-block; padding: 4px 10px; background: #fff5f5; color: #e60000; border-radius: 20px; font-size: 0.85rem; margin-bottom: 8px;">
                                 <?= $category ?>
                             </div>
                             <div style="min-height: 2.5em; margin-bottom: 8px;">
@@ -74,7 +74,7 @@ $page_title = '찜한 상품';
                             </div>
                             <div style="display: flex; align-items: baseline; gap: 8px;">
                                 <?php if ($rate > 0): ?>
-                                <span style="color: #e3405a; font-size: 16px; font-weight: 700;"><?= $rate ?>%</span>
+                                <span style="color: #e60000; font-size: 16px; font-weight: 700;"><?= $rate ?>%</span>
                                 <?php endif; ?>
                                 <span style="font-size: 15px; font-weight: 600; color: #333;"><?= $price ?>원</span>
                             </div>

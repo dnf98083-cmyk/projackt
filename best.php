@@ -61,7 +61,7 @@ if ($BASE === '') $BASE = '/';
     .best-hero {
       text-align: center;
       padding: 40px 20px;
-      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+      background: linear-gradient(135deg, #e60000 0%, #cc0000 100%);
       color: white;
       border-radius: 12px;
       margin-bottom: 40px;
@@ -216,7 +216,7 @@ if ($BASE === '') $BASE = '/';
     }
     
     .category-header .view-all {
-      color: #ff6b6b;
+      color: #e60000;
       text-decoration: none;
       font-size: 0.95rem;
     }
@@ -245,14 +245,14 @@ if ($BASE === '') $BASE = '/';
     }
     
     .category-tab.active {
-      background: #ff6b6b;
+      background: #e60000;
       color: white;
-      border-color: #ff6b6b;
+      border-color: #e60000;
     }
     
     .category-tab:hover:not(.active) {
-      border-color: #ff6b6b;
-      color: #ff6b6b;
+      border-color: #e60000;
+      color: #e60000;
     }
     
     .product-grid {
@@ -352,7 +352,7 @@ if ($BASE === '') $BASE = '/';
             <span class="category"><?= htmlspecialchars($product['category_large'] ?? '기타') ?></span>
             <h3><?= htmlspecialchars($product['content_name']) ?></h3>
             <div class="sales-count" style="font-size: 0.9rem; color: #666; margin-top: 4px;">
-                <i class="fas fa-fire" style="color: #ff6b6b; margin-right: 4px;"></i>
+                <i class="fas fa-fire" style="color: #e60000; margin-right: 4px;"></i>
                 <?= number_format($product['content_sales'] ?? 0) ?>개 판매
             </div>
           </div>

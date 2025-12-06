@@ -42,7 +42,7 @@ function generate_star_html($rating) {
         <div class="back-stars" style="display: flex;">
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
         </div>
-        <div class="front-stars" style="position: absolute; top: 0; left: 0; white-space: nowrap; overflow: hidden; width: ' . $percent . '%; color: #f90; display: flex;">
+        <div class="front-stars" style="position: absolute; top: 0; left: 0; white-space: nowrap; overflow: hidden; width: ' . $percent . '%; color: #e60000; display: flex;">
             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
         </div>
     </div>

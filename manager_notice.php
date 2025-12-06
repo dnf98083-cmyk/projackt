@@ -31,10 +31,17 @@ $notices = db_select("SELECT * FROM notice ORDER BY reg_date DESC");
             height: auto;
             min-height: 100vh;
         }
+        .table-wrapper {
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            background: white;
+        }
         .notice-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            /* margin-top: 20px; 제거 */
             background: white;
         }
         .notice-table th, .notice-table td {
@@ -45,6 +52,10 @@ $notices = db_select("SELECT * FROM notice ORDER BY reg_date DESC");
         .notice-table th {
             background-color: #f4f4f4;
             font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            border-top: none;
         }
         .notice-table td.title {
             text-align: left;
@@ -83,8 +94,6 @@ $notices = db_select("SELECT * FROM notice ORDER BY reg_date DESC");
             <a href="manager_home.php"><div class="menu"> 홈 </div></a>
             <a href="manager_member.php"><div class="menu"> 회원 관리 </div></a>
             <a href="manager_notice.php"><div class="menu" style="background-color: rgb(74 173 255);"> 공지사항 관리 </div></a>
-            <a href="manager_product.php"><div class="menu"> 상품 관리 </div></a>
-            <a href="manager_event.php"><div class="menu"> 이벤트 관리 </div></a>
             <a href="manager_inquiry.php"><div class="menu"> 고객 문의 관리 </div></a>
         </div>
 
@@ -107,45 +116,47 @@ $notices = db_select("SELECT * FROM notice ORDER BY reg_date DESC");
                         <a href="manager_notice_write.php" class="btn-write">공지사항 등록</a>
                     </div>
 
-                    <table class="notice-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 60px;">번호</th>
-                                <th>제목</th>
-                                <th style="width: 100px;">작성자</th>
-                                <th style="width: 80px;">조회수</th>
-                                <th style="width: 150px;">작성일</th>
-                                <th style="width: 80px;">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($notices as $n): ?>
-                            <tr>
-                                <td><?= $n['id'] ?></td>
-                                <td class="title">
-                                    <a href="manager_notice_edit.php?id=<?= $n['id'] ?>" style="text-decoration: none; color: inherit;">
-                                        <?= htmlspecialchars($n['title']) ?>
-                                    </a>
-                                </td>
-                                <td><?= $n['writer'] ?></td>
-                                <td><?= number_format($n['views']) ?></td>
-                                <td><?= substr($n['reg_date'], 0, 10) ?></td>
-                                <td>
-                                    <form method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                                        <input type="hidden" name="action" value="delete">
-                                        <input type="hidden" name="id" value="<?= $n['id'] ?>">
-                                        <button type="submit" class="btn-delete">삭제</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                            <?php if (empty($notices)): ?>
-                            <tr>
-                                <td colspan="6" style="padding: 30px; color: #999;">등록된 공지사항이 없습니다.</td>
-                            </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                    <div class="table-wrapper">
+                        <table class="notice-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 60px;">번호</th>
+                                    <th>제목</th>
+                                    <th style="width: 100px;">작성자</th>
+                                    <th style="width: 80px;">조회수</th>
+                                    <th style="width: 150px;">작성일</th>
+                                    <th style="width: 80px;">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($notices as $n): ?>
+                                <tr>
+                                    <td><?= $n['id'] ?></td>
+                                    <td class="title">
+                                        <a href="manager_notice_edit.php?id=<?= $n['id'] ?>" style="text-decoration: none; color: inherit;">
+                                            <?= htmlspecialchars($n['title']) ?>
+                                        </a>
+                                    </td>
+                                    <td><?= $n['writer'] ?></td>
+                                    <td><?= number_format($n['views']) ?></td>
+                                    <td><?= substr($n['reg_date'], 0, 10) ?></td>
+                                    <td>
+                                        <form method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                                            <input type="hidden" name="action" value="delete">
+                                            <input type="hidden" name="id" value="<?= $n['id'] ?>">
+                                            <button type="submit" class="btn-delete">삭제</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                                <?php if (empty($notices)): ?>
+                                <tr>
+                                    <td colspan="6" style="padding: 30px; color: #999;">등록된 공지사항이 없습니다.</td>
+                                </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </section>
         </div>

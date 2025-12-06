@@ -9,6 +9,24 @@ if (!is_manager()) {
 
 // 문의 목록 조회
 $inquiries = db_select("SELECT * FROM inquiries ORDER BY created_at DESC");
+
+// 답변 등록 처리
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'reply_inquiry') {
+    $inquiry_id = $_POST['inquiry_id'];
+    $answer = $_POST['answer'];
+    
+    // 답변 내용이 비어있지 않은지 확인
+    if (empty(trim($answer))) {
+        echo "<script>alert('답변 내용을 입력해주세요.'); history.back();</script>";
+        exit;
+    }
+
+    // DB 업데이트
+    db_update_delete("UPDATE inquiries SET answer = ?, status = 'answered' WHERE id = ?", [$answer, $inquiry_id]);
+    
+    echo "<script>alert('답변이 등록되었습니다.'); location.href='manager_inquiry.php';</script>";
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -54,6 +72,113 @@ $inquiries = db_select("SELECT * FROM inquiries ORDER BY created_at DESC");
             background-color: #e6f7ff;
             color: #1890ff;
         }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-container {
+            background: white;
+            width: 600px;
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .inquiry-info {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .info-label {
+            width: 80px;
+            font-weight: bold;
+            color: #555;
+        }
+        .info-value {
+            flex: 1;
+            color: #333;
+        }
+        .inquiry-content-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+        .reply-section {
+            margin-top: 20px;
+        }
+        .reply-textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            margin-bottom: 10px;
+            font-family: inherit;
+        }
+        .reply-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .reply-btn:hover {
+            background: #357abd;
+        }
+        .table_row {
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+        .table_row:hover {
+            background-color: #f5f5f5;
+        }
     </style>
 </head>
 
@@ -72,12 +197,6 @@ $inquiries = db_select("SELECT * FROM inquiries ORDER BY created_at DESC");
             </a>
             <a href="manager_notice.php">
                 <div class="menu"> 공지사항 관리 </div>
-            </a>
-            <a href="manager_product.php">
-                <div class="menu"> 상품 관리 </div>
-            </a>
-            <a href="manager_event.php">
-                <div class="menu"> 이벤트 관리 </div>
             </a>
             <a href="manager_inquiry.php">
                 <div class="menu" style="background-color:  rgb(74 173 255);"> 고객 문의 관리 </div>
@@ -109,7 +228,7 @@ $inquiries = db_select("SELECT * FROM inquiries ORDER BY created_at DESC");
                         </div>
                         
                         <?php foreach ($inquiries as $inquiry): ?>
-                        <div class="table_row">
+                        <div class="table_row" onclick="openInquiryModal(<?= htmlspecialchars(json_encode($inquiry)) ?>)">
                             <div class="table_col class" style="width: 15%;"><?= htmlspecialchars($inquiry['type']) ?></div>
                             <div class="table_col title" style="width: 40%; text-align: left; padding-left: 20px;">
                                 <?= htmlspecialchars($inquiry['title']) ?>
@@ -127,7 +246,7 @@ $inquiries = db_select("SELECT * FROM inquiries ORDER BY created_at DESC");
                         <?php endforeach; ?>
 
                         <?php if (empty($inquiries)): ?>
-                        <div class="table_row" style="justify-content: center; padding: 20px;">
+                        <div class="table_row" style="justify-content: center; padding: 20px; cursor: default;">
                             등록된 문의가 없습니다.
                         </div>
                         <?php endif; ?>
@@ -136,5 +255,77 @@ $inquiries = db_select("SELECT * FROM inquiries ORDER BY created_at DESC");
             </section>
         </div>
     </main>
+
+    <!-- Inquiry Detail Modal -->
+    <div id="inquiryModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title">문의 내용 확인</div>
+                <button class="modal-close" onclick="closeInquiryModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="inquiry-info">
+                    <div class="info-row">
+                        <div class="info-label">분류</div>
+                        <div class="info-value" id="modalType"></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">작성자</div>
+                        <div class="info-value" id="modalWriter"></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">작성일</div>
+                        <div class="info-value" id="modalDate"></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">제목</div>
+                        <div class="info-value" id="modalTitle" style="font-weight: bold;"></div>
+                    </div>
+                    <div class="inquiry-content-box" id="modalContent"></div>
+                </div>
+
+                <div class="reply-section">
+                    <h3 style="margin-bottom: 10px; font-size: 16px;">답변 작성</h3>
+                    <form method="POST" action="manager_inquiry.php">
+                        <input type="hidden" name="action" value="reply_inquiry">
+                        <input type="hidden" name="inquiry_id" id="modalInquiryId">
+                        <textarea name="answer" id="modalAnswer" class="reply-textarea" placeholder="답변 내용을 입력하세요..."></textarea>
+                        <button type="submit" class="reply-btn">답변 등록하기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openInquiryModal(data) {
+            document.getElementById('modalType').textContent = data.type;
+            document.getElementById('modalWriter').textContent = data.member_id;
+            document.getElementById('modalDate').textContent = data.created_at;
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalContent').textContent = data.content;
+            document.getElementById('modalInquiryId').value = data.id;
+            
+            const answerField = document.getElementById('modalAnswer');
+            if (data.answer) {
+                answerField.value = data.answer;
+            } else {
+                answerField.value = '';
+            }
+
+            document.getElementById('inquiryModal').style.display = 'flex';
+        }
+
+        function closeInquiryModal() {
+            document.getElementById('inquiryModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('inquiryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeInquiryModal();
+            }
+        });
+    </script>
 </body>
 </html>

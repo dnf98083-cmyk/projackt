@@ -80,8 +80,8 @@ function bust($relPath) {
             justify-content: center;
             padding: 6px 12px;
             background-color: #fff !important;
-            color: #ff6b6b !important;
-            border: 1px solid #ff6b6b;
+            color: #e60000 !important;
+            border: 1px solid #e60000;
             border-radius: 4px;
             cursor: pointer;
             font-size: 13px;
@@ -91,7 +91,7 @@ function bust($relPath) {
             white-space: nowrap;
         }
         .btn-delete:hover {
-            background-color: #ff6b6b !important;
+            background-color: #e60000 !important;
             color: #fff !important;
         }
         .btn-add-product {

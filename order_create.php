@@ -99,6 +99,26 @@ if ($mode === 'direct') {
 $shipping_fee = ($total_price >= 40000) ? 0 : 3000;
 $final_price = $total_price + $shipping_fee;
 
+// 포인트 사용 처리
+$use_point = isset($_POST['use_point']) ? (int)$_POST['use_point'] : 0;
+if ($use_point > 0) {
+    // 보유 포인트 확인
+    $member_point_data = db_select("SELECT point FROM members WHERE id = ?", [$user_id]);
+    $current_point = $member_point_data[0]['point'] ?? 0;
+
+    if ($use_point > $current_point) {
+        echo "<script>alert('보유 포인트가 부족합니다.'); history.back();</script>";
+        exit;
+    }
+
+    // 결제 금액보다 포인트가 클 경우 조정
+    if ($use_point > $final_price) {
+        $use_point = $final_price;
+    }
+
+    $final_price -= $use_point;
+}
+
 // 주문 ID 생성
 $order_id = date("YmdHis") . rand(1000, 9999);
 
@@ -126,6 +146,7 @@ try {
     try { $pdo->exec("ALTER TABLE pay MODIFY COLUMN order_contents LONGTEXT"); } catch(Exception $e){}
     try { $pdo->exec("ALTER TABLE pay ADD COLUMN total_price INT DEFAULT 0"); } catch(Exception $e){}
     try { $pdo->exec("ALTER TABLE pay ADD COLUMN order_date DATETIME DEFAULT CURRENT_TIMESTAMP"); } catch(Exception $e){}
+    try { $pdo->exec("ALTER TABLE pay ADD COLUMN used_point INT DEFAULT 0"); } catch(Exception $e){}
 
 } catch (Exception $e) {
     // 테이블 생성/수정 중 에러는 무시하고 진행 (INSERT에서 잡힘)
@@ -140,14 +161,19 @@ if ($json_contents === false) {
     exit;
 }
 
-$insert_sql = "INSERT INTO pay (order_id, member_id, order_contents, total_price, status) VALUES (?, ?, ?, ?, ?)";
+$insert_sql = "INSERT INTO pay (order_id, member_id, order_contents, total_price, status, used_point) VALUES (?, ?, ?, ?, ?, ?)";
 
 try {
     $pdo = db_get_pdo();
     $st = $pdo->prepare($insert_sql);
-    $result = $st->execute([$order_id, $user_id, $json_contents, $final_price, '결제완료']);
+    $result = $st->execute([$order_id, $user_id, $json_contents, $final_price, '결제완료', $use_point]);
 
     if ($result) {
+        // 포인트 차감
+        if ($use_point > 0) {
+            db_update_delete("UPDATE members SET point = point - ? WHERE id = ?", [$use_point, $user_id]);
+        }
+
         // ✅ 판매량(content_sales) 업데이트 로직 추가
         try {
             $update_sales_sql = "UPDATE contents SET content_sales = content_sales + ? WHERE content_code = ?";

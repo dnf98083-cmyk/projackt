@@ -29,7 +29,7 @@ if ($BASE === '') $BASE = '/';
         <li><a href="<?= $BASE ?>/customer_center.php">고객센터</a></li>
         <li><a href="<?= $BASE ?>/login.php">로그인</a></li>
       <?php } else { ?>
-        <li><a href="<?= $BASE ?>/my-page_order.php">마이페이지</a></li>
+        <li><a href="<?= $BASE ?>/help.php">도움말</a></li>
         <li><a href="<?= $BASE ?>/customer_center.php">고객센터</a></li>
         <li><a href="<?= $BASE ?>/logout.php">로그아웃</a></li>
       <?php } ?>

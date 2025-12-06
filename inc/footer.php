@@ -50,15 +50,15 @@
     
     <div class="footer_bottom">
         <div class="footer_inner">
-            <h3>ABOUT SIMPLE HARU</h3>
+            <h3>ABOUT MEAL KITCHEN</h3>
             <div class="company_info">
-                <span>상호 : Example Mall</span>
+                <span>상호 : Meal Kitchen</span>
                 <span>대표 이사 : 홍길동</span>
                 <span>사업자 등록 번호 : 123456-1245678</span>
                 <span>대표 전화 : 1588-1234</span>
                 <address>사업장 소재지 : 경기도 성남시 중원구 광명로 377</address>
             </div>
-            <p class="copyright">COPYRIGHT(c) 2025 HARU ALL RIGHT RESERVED.</p>
+            <p class="copyright">COPYRIGHT(c) 2025 MEAL KITCHEN ALL RIGHT RESERVED.</p>
             <a href="manager_home.php" class="admin_link">관리자 페이지</a>
         </div>
     </div>

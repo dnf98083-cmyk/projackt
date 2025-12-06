@@ -1,0 +1,154 @@
+/* help.css - 도움말 페이지 스타일 (Index 스타일 적용) */
+
+.help-page-wrapper {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+/* 헤더 영역 */
+.help-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #eee;
+}
+
+.help-title {
+  font-family: var(--font-jua), sans-serif; /* Index 타이틀 폰트 */
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.help-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+}
+
+/* 그리드 레이아웃 */
+.help-content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* 카드 스타일 (Index 상품 카드 느낌) */
+.help-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #f0f0f0;
+  text-decoration: none; /* 링크일 경우 밑줄 제거 */
+  color: inherit; /* 링크일 경우 색상 상속 */
+  cursor: default; /* 기본 커서 */
+}
+
+/* 링크로 사용되는 카드는 포인터 커서 */
+a.help-card {
+  cursor: pointer;
+}
+
+.help-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.help-card-icon {
+  background: var(--mk-red); /* 브랜드 컬러 */
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.help-card-icon i {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.help-card-body {
+  padding: 24px;
+  flex: 1;
+}
+
+.help-card-body h2 {
+  font-family: var(--font-jua), sans-serif;
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #f5f5f5;
+  padding-bottom: 10px;
+}
+
+.help-card-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.help-card-body li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+  padding-left: 10px;
+  position: relative;
+}
+
+.help-card-body li::before {
+  content: "•";
+  color: var(--mk-red);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.help-card-body li b {
+  color: #333;
+  font-weight: 600;
+}
+
+/* 하단 링크 */
+.help-footer-link {
+  text-align: center;
+  margin-top: 40px;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 12px;
+}
+
+.help-footer-link p {
+  font-size: 1.1rem;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.btn-customer-center {
+  display: inline-block;
+  background: var(--mk-red);
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-customer-center:hover {
+  background: var(--mk-red-2);
+}
+
+@media (max-width: 768px) {
+  .help-content-grid {
+    grid-template-columns: 1fr;
+  }
+  .help-title {
+    font-size: 2rem;
+  }
+}

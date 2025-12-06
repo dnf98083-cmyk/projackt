@@ -57,7 +57,7 @@ if (!isset($_SESSION['member_id'])) {
         .btn-submit {
             width: 100%;
             padding: 15px;
-            background: #ff6b6b;
+            background: #e60000;
             color: white;
             border: none;
             border-radius: 6px;
@@ -67,7 +67,7 @@ if (!isset($_SESSION['member_id'])) {
             transition: background 0.2s;
         }
         .btn-submit:hover {
-            background: #e3405a;
+            background: #cc0000;
         }
         .file-preview {
             margin-top: 10px;

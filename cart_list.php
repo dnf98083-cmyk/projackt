@@ -224,7 +224,7 @@ function bust($relPath) {
 }
 .cart-tab.active{
     background: white;
-    border-bottom: 2px solid #ff6b35;
+    border-bottom: 2px solid #e60000;
 }
 .cart-tab input[type="checkbox"]{
     margin: 0;
@@ -390,11 +390,11 @@ function bust($relPath) {
     color: #333;
 }
 .total-value.orange{
-    color: #ff7a00;
+    color: #e60000;
 }
 .total-value.large{
     font-size: 18px;
-    color: #ff6b35;
+    color: #e60000;
 }
 
 /* 하단 버튼 */
@@ -415,7 +415,7 @@ function bust($relPath) {
 .btn-cart-primary{
     flex: 2;
     padding: 14px 0;
-    background: #ff6b35;
+    background: #e60000;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -661,7 +661,7 @@ function orderSelected() {
 
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = 'order_create.php';
+    form.action = 'payment.php';
 
     const modeInput = document.createElement('input');
     modeInput.type = 'hidden';

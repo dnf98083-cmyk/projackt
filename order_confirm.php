@@ -28,7 +28,12 @@ try {
     $stmt = $pdo->prepare("UPDATE pay SET status = '구매확정' WHERE order_id = ?");
     $stmt->execute([$order_id]);
     
-    echo "<script>alert('구매가 확정되었습니다.'); location.href='my-page_order.php';</script>";
+    // [추가] 구매 확정 시 포인트 지급 (100P)
+    db_update_delete("UPDATE members SET point = point + 100 WHERE id = ?", [$user_id]);
+    // 포인트 히스토리 기록
+    db_update_delete("INSERT INTO point_history (member_id, amount, type, description, reg_date) VALUES (?, 100, 'purchase', '구매 확정 보상', NOW())", [$user_id]);
+
+    echo "<script>alert('구매가 확정되었습니다. (포인트 100P 적립)'); location.href='my-page_order.php';</script>";
 } catch (Exception $e) {
     echo "<script>alert('처리 중 오류가 발생했습니다.'); history.back();</script>";
 }

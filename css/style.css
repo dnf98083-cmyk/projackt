@@ -341,7 +341,7 @@ html, body{
 
 /* 가격 및 상태 */
 .content_price_wrapper{ display:flex; align-items:baseline; gap:10px; }
-.discount_rate{ color:#e3405a; font-family:"Alkalami", serif; font-size:18px; font-weight:700; }
+.discount_rate{ color:#e60000; font-family:"Alkalami", serif; font-size:18px; font-weight:700; }
 .content_price{ font-size:15px; }
 .delivery_today_mark_wrapper{ font-size:12px; color:#555; }
 
