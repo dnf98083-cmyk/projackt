@@ -26,8 +26,9 @@ function flash_get(string $key): ?string {
 /** User helpers */
 function current_user(): ?array { return $_SESSION['user'] ?? null; }
 function is_manager(): bool {
-  $lvl = $_SESSION['user']['level'] ?? 9; // 1~2 관리자로 가정
-  return (int)$lvl <= 2;
+  $lvl = $_SESSION['user']['level'] ?? 9; 
+  // 1: 최고관리자, 2: 부관리자. (0이나 음수는 관리자 아님)
+  return (int)$lvl >= 1 && (int)$lvl <= 2;
 }
 
 /** Masking Helpers */

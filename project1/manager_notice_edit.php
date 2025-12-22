@@ -1,20 +1,46 @@
 <?php
 require_once 'inc/session.php';
+require_once 'inc/db.php';
 
 if (!is_manager()) {
     echo "<script>alert('관리자만 접근 가능합니다.'); location.href='index.php';</script>";
     exit;
 }
+
+if (!isset($_GET['id'])) {
+    echo "<script>alert('잘못된 접근입니다.'); location.href='manager_notice.php';</script>";
+    exit;
+}
+
+$id = $_GET['id'];
+$notice = db_select("SELECT * FROM notice WHERE id = ?", [$id]);
+
+if (empty($notice)) {
+    echo "<script>alert('존재하지 않는 공지사항입니다.'); location.href='manager_notice.php';</script>";
+    exit;
+}
+
+$notice = $notice[0];
 ?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>관리자 페이지 - 공지사항 등록</title>
+    <title>관리자 페이지 - 공지사항 수정</title>
     <link rel="stylesheet" href="css/style.css?v=<?= time() ?>">
     <link rel="stylesheet" href="css/manager.css?v=<?= time() ?>">
     <style>
+        /* manager.css의 .board 스타일 오버라이드 - 폼이 잘리지 않도록 수정 */
+        #manager_body .manager_wrapper .main_display .contents .board {
+            width: 100%;
+            height: auto;
+            margin: 0;
+            padding: 0;
+            display: block;
+            background: transparent;
+        }
+
         #manager_body .manager_wrapper {
             height: auto;
             min-height: 100vh;
@@ -72,6 +98,11 @@ if (!is_manager()) {
             margin-left: 10px;
             text-decoration: none;
         }
+        .info-text {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body id="manager_body">
@@ -95,23 +126,29 @@ if (!is_manager()) {
             
             <section class="contents">
                 <section class="contents_header">
-                    <span class="title">공지사항 등록</span>
+                    <span class="title">공지사항 수정</span>
                 </section>
                 
                 <section class="board">
-                    <form action="manager_notice_insert.php" method="post" class="write-form">
+                    <form action="manager_notice_update.php" method="post" class="write-form">
+                        <input type="hidden" name="id" value="<?= $notice['id'] ?>">
+                        
+                        <div class="info-text">
+                            작성자: <?= $notice['writer'] ?> | 작성일: <?= $notice['reg_date'] ?> | 조회수: <?= $notice['views'] ?>
+                        </div>
+
                         <div class="form-group">
                             <label for="title">제목</label>
-                            <input type="text" id="title" name="title" class="form-control" required placeholder="제목을 입력하세요">
+                            <input type="text" id="title" name="title" class="form-control" required value="<?= htmlspecialchars($notice['title']) ?>">
                         </div>
                         
                         <div class="form-group">
                             <label for="content">내용</label>
-                            <textarea id="content" name="content" class="form-control" required placeholder="내용을 입력하세요"></textarea>
+                            <textarea id="content" name="content" class="form-control" required><?= htmlspecialchars($notice['content']) ?></textarea>
                         </div>
 
                         <div class="btn-group">
-                            <button type="submit" class="btn-submit">등록</button>
+                            <button type="submit" class="btn-submit">수정</button>
                             <a href="manager_notice.php" class="btn-cancel">취소</a>
                         </div>
                     </form>

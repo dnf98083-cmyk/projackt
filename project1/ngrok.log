@@ -1,0 +1,13 @@
+t=2025-12-11T10:41:58+0900 lvl=info msg="no configuration paths supplied"
+t=2025-12-11T10:41:59+0900 lvl=info msg="using configuration at default config path" path=C:\\Users\\rladn\\AppData\\Local/ngrok/ngrok.yml
+t=2025-12-11T10:41:59+0900 lvl=info msg="open config file" path=C:\\Users\\rladn\\AppData\\Local\\ngrok\\ngrok.yml err=nil
+t=2025-12-11T10:41:59+0900 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+t=2025-12-11T10:41:59+0900 lvl=info msg="client session established" obj=tunnels.session
+t=2025-12-11T10:41:59+0900 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2025-12-11T10:41:59+0900 lvl=eror msg="session closing" obj=tunnels.session err="failed to start tunnel: The endpoint 'https://charise-vaned-synthia.ngrok-free.dev' is already online. Either\n1. stop your existing endpoint first, or\n2. start both endpoints with `--pooling-enabled` to load balance between them.\r\n\r\nERR_NGROK_334\r\n"
+t=2025-12-11T10:41:59+0900 lvl=info msg="accept failed" obj=tunnels.session obj=csess id=f39360e0b5d1 err="reconnecting session closed"
+t=2025-12-11T10:41:59+0900 lvl=info msg="no more state changes" obj=tunnels.session
+t=2025-12-11T10:41:59+0900 lvl=info msg="received stop request" obj=app stopReq="{err:{Inner:{Inner:0xc0001064d0}} restart:false}"
+t=2025-12-11T10:41:59+0900 lvl=eror msg="terminating with error" obj=app err="failed to start tunnel: The endpoint 'https://charise-vaned-synthia.ngrok-free.dev' is already online. Either\n1. stop your existing endpoint first, or\n2. start both endpoints with `--pooling-enabled` to load balance between them.\r\n\r\nERR_NGROK_334\r\n"
+t=2025-12-11T10:41:59+0900 lvl=warn msg="failed to check for update" obj=updater err="Post \"https://update.equinox.io/check\": context canceled"
+t=2025-12-11T10:41:59+0900 lvl=crit msg="command failed" err="failed to start tunnel: The endpoint 'https://charise-vaned-synthia.ngrok-free.dev' is already online. Either\n1. stop your existing endpoint first, or\n2. start both endpoints with `--pooling-enabled` to load balance between them.\r\n\r\nERR_NGROK_334\r\n"

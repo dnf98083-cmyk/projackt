@@ -148,7 +148,7 @@ if (!isset($best_products) || !is_array($best_products)) $best_products = [];
       <div class="banner_slide" id="hero" aria-roledescription="carousel">
         <div class="banner_track">
           <?php foreach ($banners as $i => $p): ?>
-            <img src="<?= bust($p) ?>" alt="메인 배너 <?= $i+1 ?>" />
+            <img src="<?= bust($p) ?>" alt="메인 배너 <?= $i+1 ?>" <?= $i > 0 ? 'loading="lazy"' : '' ?> />
           <?php endforeach; ?>
         </div>
         <?php if (count($banners) > 1): ?>

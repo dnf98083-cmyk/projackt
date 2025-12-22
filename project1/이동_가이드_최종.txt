@@ -1,0 +1,19 @@
+[이동 가이드]
+
+1. 폴더 이동
+   - 이 `examplemall_kwr` 폴더 전체를 새 컴퓨터의 `C:\xampp\htdocs\` 안에 복사하세요.
+   - 주소: `C:\xampp\htdocs\examplemall_kwr`
+
+2. 데이터베이스 복구 (필수!)
+   - 새 컴퓨터에서 XAMPP Control Panel을 켜고 Apache, MySQL을 Start 하세요.
+   - 인터넷 주소창에 `http://localhost/phpmyadmin` 입력.
+   - 좌측 메뉴 `New` 클릭 -> 데이터베이스 이름 `exmall` 입력 -> `utf8_general_ci` 선택 -> `Create` 버튼 클릭.
+   - 방금 만든 `exmall` 클릭 -> 상단 메뉴 `Import(가져오기)` 클릭.
+   - `파일 선택` 버튼 클릭 -> 이 폴더 안의 `DB` 폴더에 있는 `latest_backup.sql` 파일 선택.
+   - 하단 `Go(실행)` 버튼 클릭.
+
+3. 실행
+   - 인터넷 주소창에 `http://localhost/examplemall_kwr` 입력하면 끝!
+
+[주의사항]
+- 새 컴퓨터의 MySQL 비밀번호가 있다면 `inc/db.php` 파일의 `$db_pw` 부분을 수정해야 합니다. (보통은 비워두면 됩니다.)

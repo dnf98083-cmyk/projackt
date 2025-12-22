@@ -2018,3 +2018,314 @@ body.is-drawer-open {
         border-radius: 16px;
     }
 }
+
+/* =========================================================
+   MOBILE HEADER & LAYOUT FIXES
+   ========================================================= */
+@media (max-width: 768px) {
+    /* 1. Reset fixed widths that cause horizontal overflow */
+    .main_wrapper, .footer_inner, .main_nav, .main_menu_bar {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 2. Header Layout Adjustments */
+    :root {
+        /* Adjust header height variable for drawer positioning */
+        /* Logo row (~50px) + Search row (~50px) + Menu (~45px) */
+        --header-h: 145px; 
+    }
+
+    /* Hide top utility bar (Login/Help) to save space */
+    .util_nav { display: none; }
+
+    /* Main Nav: Wrap content for mobile */
+    .main_nav {
+        height: auto;
+        flex-wrap: wrap;
+        padding: 10px 16px;
+        gap: 10px;
+    }
+
+    /* Brand Logo */
+    .mk-brand {
+        min-width: auto;
+        flex: 1 1 auto;
+    }
+    .mk-brand span {
+        font-size: 24px;
+    }
+    /* Disable animations on mobile */
+    .mk-brand::before, .mk-brand::after { display: none; }
+
+    /* Util Icons (Cart, MyPage) */
+    .mk-util {
+        min-width: auto;
+        flex: 0 0 auto;
+    }
+    .mk-util ul { gap: 12px; }
+    .mk-util li a { padding: 4px; }
+    .mk-util li a span { display: none; } /* Hide text */
+    .mk-util li a i { font-size: 22px; }
+
+    /* Search Bar: Full width on new line */
+    .mk-search {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin: 0;
+        height: 40px;
+    }
+    
+    /* Main Menu Bar */
+    .main_menu_bar {
+        height: 45px;
+    }
+    .main_menu_bar a {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+    
+    /* Fix for "Header Expands" issue: Ensure sticky header doesn't jump */
+    #header_wrapper {
+        height: auto;
+        min-height: var(--header-h);
+    }
+
+    /* =========================================
+       3. Login Page Mobile Fixes
+       ========================================= */
+    #login_wrapper {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .login_sns_wrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .kakao_login, .naver_login {
+        width: 100%;
+    }
+    .ID_wrapper, .FW_wrapper, .login_btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .login_or_title {
+        width: 100%;
+    }
+    .login_member_wrapper {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    .member .member_login, .member .member_sign_up {
+        width: 100%;
+    }
+
+    /* =========================================
+       4. Sign Up Page Mobile Fixes
+       ========================================= */
+    .main_wrapper.sign_up .join_box {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        border: none;
+        box-sizing: border-box;
+    }
+    .main_wrapper.sign_up .progress {
+        width: 100%;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+    }
+    .main_wrapper.sign_up .join_box .member_form {
+        flex-direction: column;
+        padding: 0;
+    }
+    .main_wrapper.sign_up .join_box .member_form .member_form_col {
+        width: 100%;
+    }
+    .main_wrapper.sign_up .join_box .member_form .member_form_col .form {
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    .main_wrapper.sign_up .join_box .member_form .member_form_col .form .col1 {
+        width: 100%;
+        margin-bottom: 5px;
+        float: none;
+    }
+    .main_wrapper.sign_up .join_box .member_form .member_form_col .form .col2 {
+        width: 100%;
+        float: none;
+    }
+    .main_wrapper.sign_up .join_box .member_form .member_form_col .form .col2 input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .main_wrapper.sign_up .join_box .member_form .member_form_col .form .col3 {
+        float: none;
+        width: 100%;
+    }
+    .main_wrapper.sign_up .join_box .member_form .member_form_col .form .col3 button {
+        position: static;
+        margin-top: 5px;
+        width: 100%;
+    }
+
+    /* =========================================
+       5. Cart Page Mobile Fixes
+       ========================================= */
+    .main_wrapper.cart {
+        width: 100%;
+        padding: 20px 10px;
+        box-sizing: border-box;
+    }
+    .cart_list_area {
+        width: 100%;
+        overflow-x: auto; /* Allow horizontal scroll for table if needed */
+    }
+    .purchase_buttons {
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+    }
+    .purchase_buttons button {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* =========================================
+       6. Product Detail Page Mobile Fixes
+       ========================================= */
+    .main_wrapper.contents_detail {
+        width: 100%;
+        padding: 20px 16px;
+        box-sizing: border-box;
+    }
+    .main_wrapper.contents_detail .top {
+        flex-direction: column;
+    }
+    .main_wrapper.contents_detail .top .top_left, 
+    .main_wrapper.contents_detail .top .top_right {
+        width: 100%;
+    }
+    .main_wrapper.contents_detail .top .top_left .main_img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+    .main_wrapper.contents_detail .top .top_left .imgs {
+        width: 100%;
+        gap: 10px;
+        justify-content: flex-start;
+        overflow-x: auto;
+    }
+    .main_wrapper.contents_detail .top .top_left .imgs .img {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+    }
+    .main_wrapper.contents_detail .top .top_right {
+        margin-top: 20px;
+    }
+    .main_wrapper.contents_detail .top .top_right .contents_infos {
+        width: 100%;
+        height: auto;
+    }
+    .main_wrapper.contents_detail .top .top_right .buttons.choice {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .main_wrapper.contents_detail .top .top_right .buttons.choice button {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* =========================================
+       7. My Page Mobile Fixes
+       ========================================= */
+    /* Stack Sidebar and Content */
+    .mypage-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+    .mypage-sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 20px;
+    }
+    .mypage-content {
+        width: 100%;
+        padding: 0;
+    }
+
+    /* Profile Box */
+    .profile-box {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+    .profile-box .user-info {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding: 15px 0;
+        margin: 0;
+    }
+    .profile-box .user-stats {
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    /* Order Status Pipeline */
+    .status-pipeline {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .status-pipeline .step {
+        width: calc(33.33% - 20px); /* 3 items per row */
+        margin-bottom: 10px;
+    }
+    .status-pipeline .pipeline-arrow {
+        display: none; /* Hide arrows on mobile for cleaner grid look */
+    }
+
+    /* Date Filter */
+    .date-filter-wrap form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .date-filter-wrap input[type="date"] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .date-filter-wrap button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Tables (Order List, etc.) */
+    .mypage-table-wrap {
+        overflow-x: auto;
+    }
+    .mypage-table {
+        min-width: 600px; /* Force scroll if table is too wide */
+    }
+    
+    /* Responsive Table Cells (Optional: Stack cells if needed, but scroll is safer for data tables) */
+    /* 
+    .mypage-table thead { display: none; }
+    .mypage-table tr { display: block; margin-bottom: 15px; border: 1px solid #eee; }
+    .mypage-table td { display: flex; justify-content: space-between; padding: 10px; border: none; border-bottom: 1px solid #f5f5f5; }
+    .mypage-table td::before { content: attr(data-label); font-weight: bold; }
+    */
+}

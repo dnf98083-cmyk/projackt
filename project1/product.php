@@ -213,7 +213,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?= htmlspecialchars($page_title) ?> - Meal Kitchen</title>
 
-    <link rel="stylesheet" href="<?= $BASE ?>/css/style.css?v=<?= time() ?>" /> 
+    <link rel="stylesheet" href="<?= $BASE ?>/css/style.css" /> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
 </head>
 <body class="product-page">
@@ -229,7 +229,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 1) {
                     <h1 class="page-main-title"><?= htmlspecialchars($page_title) ?></h1>
                     
                     <div class="list_header">
-                        <span class="total_count_display">총 <?= $total_all_count ?>개 상품이 있습니다</span>
+                        <span class="total_count_display">총 <?= $total_matching ?>개 상품이 있습니다</span>
                         
                         <div class="sort_options_wrapper">
                             

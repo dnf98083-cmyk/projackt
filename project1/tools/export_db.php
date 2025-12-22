@@ -56,10 +56,14 @@ foreach($tables as $table) {
 
 // 파일 저장
 $fileName = 'latest_backup.sql';
-$handle = fopen(__DIR__ . '/../' . $fileName, 'w+');
+// DB 폴더가 없으면 생성
+if (!file_exists(__DIR__ . '/../DB')) {
+    mkdir(__DIR__ . '/../DB', 0777, true);
+}
+$handle = fopen(__DIR__ . '/../DB/' . $fileName, 'w+');
 fwrite($handle, $return);
 fclose($handle);
 
-echo "백업 완료! 프로젝트 루트 폴더에 {$fileName} 파일이 생성되었습니다.\n";
+echo "백업 완료! DB 폴더에 {$fileName} 파일이 생성되었습니다.\n";
 echo "이 파일을 새 컴퓨터의 phpMyAdmin에서 가져오기(Import) 하시면 됩니다.";
 ?>
